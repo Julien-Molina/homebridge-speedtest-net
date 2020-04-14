@@ -27,6 +27,7 @@ function SpeedtestNet(log, config, api) {
   !this.dlspeed ? this.dlspeed = 0 : this.dlspeed;
   !this.ulspeed ? this.ulspeed = 0 : this.ulspeed;
   !this.ping ? this.ping = 0 : this.ping;
+  !this.externalIp ? this.externalIp = '0.0.0.0' : this.externalIp;
 
   Characteristic.DownloadSpeed = function() {
     Characteristic.call(this, 'Download', 'C1107888-007C-2000-8000-0026BB765291');
@@ -126,14 +127,13 @@ SpeedtestNet.prototype = {
 
     this.historyService = new FakeGatoHistoryService('weather', this, {
       storage: 'fs',
-      disableTimer: true,
       path: HomebridgeAPI.user.cachedAccessoryPath()
     });
 
     (async function() {
       await self.getData();
+      self.getHistory();
     })();
-    this.getHistory();
 
     return [this.informationService, this.Sensor, this.historyService];
 
@@ -164,6 +164,11 @@ SpeedtestNet.prototype = {
       self.Sensor.getCharacteristic(Characteristic.DownloadSpeed).updateValue(self.dlspeed);
       self.Sensor.getCharacteristic(Characteristic.UploadSpeed).updateValue(self.ulspeed);
       self.Sensor.getCharacteristic(Characteristic.Ping).updateValue(self.ping);
+      self.Sensor.getCharacteristic(Characteristic.ExternalIp).updateValue(self.externalIp);
+
+      setTimeout(function() {
+        self.getData();
+      }, self.interval);
   } catch (err) {
     self.log('An error occured: ' + err + ' - Trying again in 1 min');
       self.dlspeed = self.dlspeed;
@@ -175,6 +180,7 @@ SpeedtestNet.prototype = {
       self.Sensor.getCharacteristic(Characteristic.DownloadSpeed).updateValue(self.dlspeed);
       self.Sensor.getCharacteristic(Characteristic.UploadSpeed).updateValue(self.ulspeed);
       self.Sensor.getCharacteristic(Characteristic.Ping).updateValue(self.ping);
+      self.Sensor.getCharacteristic(Characteristic.ExternalIp).updateValue(self.externalIp);
 
       setTimeout(async function() {
         await self.getData();
@@ -189,7 +195,7 @@ SpeedtestNet.prototype = {
         self.log('Add history data', self.dlspeed, self.ulspeed, self.ping);
 
         self.historyService.addEntry({
-          time: Date.now(),
+          time: parseInt((Date.now() / 1000).toFixed(0), 10),
           temp: self.dlspeed,
           pressure: self.ping,
           humidity: self.ulspeed
@@ -197,7 +203,7 @@ SpeedtestNet.prototype = {
     }
     setTimeout(function() {
       self.getHistory();
-    }, this.interval);
+    }, 8 * 60 * 1000); // Every 8 minutes
   },
 
   identify: function(callback) {
