@@ -1,0 +1,36 @@
+{
+  "name": "homebridge-speedtest-net",
+  "description": "Homebridge plugin for Speedtest.net",
+  "displayName": "Homebridge Speedtest.net",
+  "author": "Stefan Kienzle",
+  "license": "MIT",
+  "version": "1.0.0",
+  "keywords": [
+    "broadband",
+    "speed",
+    "homebridge",
+    "homebridge-plugin",
+    "plugin"
+  ],
+  "main": "index.js",
+  "engines": {
+    "homebridge": "~0.4.53",
+    "node": "^12.16.2"
+  },
+  "scripts": {
+    "prepare": "standard",
+    "test": "standard && echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "speedtest-net": "^2.1.1",
+    "fakegato-history": "^0.5.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kienz/homebridge-speedtest-net.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kienz/homebridge-speedtest-net/issues"
+  },
+  "homepage": "https://github.com/Kienz/homebridge-speedtest-net#readme"
+}

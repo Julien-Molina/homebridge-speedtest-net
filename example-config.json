@@ -1,0 +1,15 @@
+{
+ "bridge": {
+   ...
+},
+ "accessories": [
+    {
+      "accessory": "Speedtest.net",
+      "name": "Internet",
+      "interval": 60
+    }
+],
+ "platforms": [
+   ...
+ ]
+}
