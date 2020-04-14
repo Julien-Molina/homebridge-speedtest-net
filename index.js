@@ -87,6 +87,7 @@ function Speedtest(log, config, api) {
 }
 
 Speedtest.prototype = {
+  const self = this;
 
   getServices: function() {
 
@@ -130,7 +131,7 @@ Speedtest.prototype = {
     });
 
     (async function() {
-      await this.getData();
+      await self.getData();
     })();
     this.getHistory();
 
