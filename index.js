@@ -10,7 +10,7 @@ module.exports = function(homebridge) {
   HomebridgeAPI = homebridge;
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
-  homebridge.registerAccessory('homebridge-speedtest-net', 'Speedtest.net', Speedtest);
+  homebridge.registerAccessory('homebridge-speedtest-net', 'SpeedtestNet', Speedtest);
 };
 
 function Speedtest(log, config, api) {
@@ -21,7 +21,7 @@ function Speedtest(log, config, api) {
   this.api = api;
 
   //BASE
-  this.name = config.name || 'Speedtest.net';
+  this.name = config.name || 'SpeedtestNet';
   this.displayName = config.displayName || config.name;
   this.interval = (config.interval * 60 * 1000) || 60 * 60 * 1000;
   !this.dlspeed ? this.dlspeed = 0 : this.dlspeed;
@@ -94,7 +94,7 @@ Speedtest.prototype = {
       .setCharacteristic(Characteristic.Name, this.name)
       .setCharacteristic(Characteristic.Identify, this.name)
       .setCharacteristic(Characteristic.Manufacturer, 'Kienz')
-      .setCharacteristic(Characteristic.Model, 'Speedtest.net')
+      .setCharacteristic(Characteristic.Model, 'SpeedtestNet')
       .setCharacteristic(Characteristic.SerialNumber, '11111100100');
 
     this.Sensor = new Service.TemperatureSensor(this.name);

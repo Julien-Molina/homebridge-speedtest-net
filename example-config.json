@@ -4,7 +4,7 @@
 },
  "accessories": [
     {
-      "accessory": "Speedtest.net",
+      "accessory": "SpeedtestNet",
       "name": "Internet",
       "interval": 60
     }

@@ -15,7 +15,7 @@
   "main": "index.js",
   "engines": {
     "homebridge": "~0.4.53",
-    "node": "^12.16.2"
+    "node": "^12.14.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
