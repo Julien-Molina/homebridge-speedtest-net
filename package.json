@@ -4,7 +4,7 @@
   "displayName": "Homebridge Speedtest.net",
   "author": "Stefan Kienzle",
   "license": "MIT",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "keywords": [
     "broadband",
     "speedtest",

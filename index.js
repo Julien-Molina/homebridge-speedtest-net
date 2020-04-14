@@ -126,8 +126,7 @@ SpeedtestNet.prototype = {
       .updateValue(this.externalIp);
 
     this.historyService = new FakeGatoHistoryService('weather', this, {
-      storage: 'fs',
-      path: HomebridgeAPI.user.cachedAccessoryPath()
+      storage: 'fs'
     });
 
     (async function() {
