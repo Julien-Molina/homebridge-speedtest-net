@@ -10,10 +10,10 @@ module.exports = function(homebridge) {
   HomebridgeAPI = homebridge;
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
-  homebridge.registerAccessory('homebridge-speedtest-net', 'SpeedtestNet', Speedtest);
+  homebridge.registerAccessory('homebridge-speedtest-net', 'SpeedtestNet', SpeedtestNet);
 };
 
-function Speedtest(log, config, api) {
+function SpeedtestNet(log, config, api) {
 
   //HB
   this.config = config;
@@ -21,8 +21,8 @@ function Speedtest(log, config, api) {
   this.api = api;
 
   //BASE
-  this.name = config.name || 'SpeedtestNet';
-  this.displayName = config.displayName || config.name;
+  this.name = config['name'] || 'SpeedtestNet';
+  this.displayName = config.name;
   this.interval = (config.interval * 60 * 1000) || 60 * 60 * 1000;
   !this.dlspeed ? this.dlspeed = 0 : this.dlspeed;
   !this.ulspeed ? this.ulspeed = 0 : this.ulspeed;
@@ -86,10 +86,10 @@ function Speedtest(log, config, api) {
 
 }
 
-Speedtest.prototype = {
-  const self = this;
+SpeedtestNet.prototype = {
 
   getServices: function() {
+    const self = this;
 
     this.informationService = new Service.AccessoryInformation()
       .setCharacteristic(Characteristic.Name, this.name)
