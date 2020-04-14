@@ -10,7 +10,7 @@ module.exports = function(homebridge) {
   HomebridgeAPI = homebridge;
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
-  homebridge.registerAccessory('homebridge-speedtest-net', 'Speedtest.net', BSpeedtestroadband);
+  homebridge.registerAccessory('homebridge-speedtest-net', 'Speedtest.net', Speedtest);
 };
 
 function Speedtest(log, config, api) {
