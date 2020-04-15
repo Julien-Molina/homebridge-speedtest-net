@@ -4,7 +4,7 @@
   "displayName": "Homebridge Speedtest.net",
   "author": "Stefan Kienzle",
   "license": "MIT",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "keywords": [
     "broadband",
     "speedtest",
@@ -22,8 +22,7 @@
   },
   "dependencies": {
     "speedtest-net": "^2.1.1",
-    "fakegato-history": "^0.5.6",
-    "moment": "^2.24.0"
+    "fakegato-history": "^0.5.6"
   },
   "repository": {
     "type": "git",

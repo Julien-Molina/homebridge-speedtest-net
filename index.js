@@ -2,7 +2,6 @@
 
 const speedTest = require('speedtest-net');
 const inherits = require('util').inherits;
-const moment = require('moment');
 
 let Service, Characteristic, FakeGatoHistoryService, HomebridgeAPI;
 
@@ -155,7 +154,7 @@ SpeedtestNet.prototype = {
 
       self.dlspeed = (data.download.bandwidth * 8 / 1000 / 1000).toFixed(2);
       self.ulspeed = (data.upload.bandwidth * 8/ 1000 / 1000).toFixed(2);
-      self.ping = data.ping.latency;
+      self.ping = data.ping.latency.toFixed(0);
       self.externalIp = data.interface.externalIp;
 
       self.log('Download: ' + self.speedText(data.download.bandwidth));
@@ -198,15 +197,16 @@ SpeedtestNet.prototype = {
         self.log('Add history data', self.dlspeed, self.ulspeed, self.ping);
 
         self.historyService.addEntry({
-          time: moment().unix(),
-          temp: self.dlspeed,
-          pressure: self.ping,
-          humidity: self.ulspeed
+          time: new Date().getTime() / 1000,
+          temp: self.Sensor.getCharacteristic(Characteristic.CurrentTemperature).value,
+          pressure: self.Sensor.getCharacteristic(Characteristic.Ping).value,
+          humidity: self.Sensor.getCharacteristic(Characteristic.UploadSpeed).value
         });
     }
-    setTimeout(function() {
+
+    setTimeout(function () {
       self.getHistory();
-    }, 8 * 60 * 1000); // Every 8 minutes
+    }, 8 * 60 * 1000); // Every 8 mins
   },
 
   identify: function(callback) {
