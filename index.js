@@ -2,6 +2,7 @@
 
 const speedTest = require('speedtest-net');
 const inherits = require('util').inherits;
+const moment = require('moment');
 
 let Service, Characteristic, FakeGatoHistoryService, HomebridgeAPI;
 
