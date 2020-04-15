@@ -126,7 +126,9 @@ SpeedtestNet.prototype = {
       .updateValue(this.externalIp);
 
     this.historyService = new FakeGatoHistoryService('weather', this, {
-      storage: 'fs'
+      storage: 'fs',
+      disableTimer: true,
+      path: HomebridgeAPI.user.cachedAccessoryPath()
     });
 
     (async function() {
@@ -141,6 +143,7 @@ SpeedtestNet.prototype = {
   getData: async function() {
     const self = this;
     let data;
+
     self.log('Starting broadband measurement...');
 
     try {
@@ -166,7 +169,7 @@ SpeedtestNet.prototype = {
       self.Sensor.getCharacteristic(Characteristic.ExternalIp).updateValue(self.externalIp);
 
       setTimeout(function() {
-        self.getData();
+        await self.getData();
       }, self.interval);
   } catch (err) {
     self.log('An error occured: ' + err + ' - Trying again in 1 min');
@@ -190,11 +193,11 @@ SpeedtestNet.prototype = {
   getHistory: function() {
     const self = this;
 
-    if (self.dlspeed != 0 && self.ulspeed != 0 && self.ping != 0) {
+    if (self.dlspeed !== 0 && self.ulspeed !== 0 && self.ping !== 0) {
         self.log('Add history data', self.dlspeed, self.ulspeed, self.ping);
 
         self.historyService.addEntry({
-          time: parseInt((Date.now() / 1000).toFixed(0), 10),
+          time: moment().unix(),
           temp: self.dlspeed,
           pressure: self.ping,
           humidity: self.ulspeed
