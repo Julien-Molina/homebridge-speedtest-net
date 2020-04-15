@@ -168,7 +168,7 @@ SpeedtestNet.prototype = {
       self.Sensor.getCharacteristic(Characteristic.Ping).updateValue(self.ping);
       self.Sensor.getCharacteristic(Characteristic.ExternalIp).updateValue(self.externalIp);
 
-      setTimeout(function() {
+      setTimeout(async function() {
         await self.getData();
       }, self.interval);
   } catch (err) {
