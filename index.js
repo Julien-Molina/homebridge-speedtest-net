@@ -111,6 +111,9 @@ SpeedtestNet.prototype = {
       })
       .updateValue(this.dlspeed);
 
+    this.Sensor.addCharacteristic(Characteristic.TemperatureDisplayUnits)
+      .updateValue(0);
+
     this.Sensor.addCharacteristic(Characteristic.DownloadSpeed);
     this.Sensor.getCharacteristic(Characteristic.DownloadSpeed)
       .updateValue(this.dlspeed);
