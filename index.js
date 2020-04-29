@@ -103,9 +103,11 @@ SpeedtestNet.prototype = {
 
     this.Sensor.getCharacteristic(Characteristic.CurrentTemperature)
       .setProps({
-        minValue: 0,
+        unit: 'Mbps',
         maxValue: 9999,
-        minStep: 0.01
+        minValue: 0,
+        minStep: 0.01,
+        perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
       })
       .updateValue(this.dlspeed);
 
@@ -152,8 +154,8 @@ SpeedtestNet.prototype = {
           acceptGdpr: true
       });
 
-      self.dlspeed = (data.download.bandwidth * 8 / 1000 / 1000).toFixed(2);
-      self.ulspeed = (data.upload.bandwidth * 8/ 1000 / 1000).toFixed(2);
+      self.dlspeed = (data.download.bandwidth * 8 / 1000 / 1000).toFixed(1);
+      self.ulspeed = (data.upload.bandwidth * 8/ 1000 / 1000).toFixed(1);
       self.ping = data.ping.latency.toFixed(0);
       self.externalIp = data.interface.externalIp;
 
