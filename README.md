@@ -21,6 +21,22 @@ After [Homebridge](https://github.com/nfarina/homebridge) has been installed:
 
  ```sudo npm install -g homebridge-speedtest-net@latest --unsafe-perm```
 
+ **NOTE**:
+ If you get the follwing error in the console you have to manually create the directories `binaries` and `pkg`.
+
+ _An error occured: Error: EACCES: permission denied, mkdir '/usr/lib/node_modules/homebridge-speedtest-net/node_modules/speedtest-net/binaries' - Trying again in 1 min_
+
+Open the terminal (eg. in homebridge-config-ui-x) and execute the following commands.
+
+ ```bash
+ cd /usr/lib/node_modules/homebridge-speedtest-net/node_modules/speedtest-net/
+ su pi
+ sudo mkdir binaries pkg
+ sudo chmod 777 binaries/ pkg/
+ ````
+
+This problems occures because the NodeJS tool [speedtest.net](https://github.com/ddsol/speedtest.net) wants to create directories to download the test files for speed test. I have to look into it.
+
 
  ## Example config.json:
 
